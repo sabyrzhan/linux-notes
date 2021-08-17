@@ -126,3 +126,25 @@ LBA (Logical Block Access) interface. Even though its performance is very low co
 device driver, but it is enough to read kernel image and load to RAM.
 
 The list of known boot loaders are GRUB, LILO (ELILO that supports UEFI), SYSLINUX, LOADLIN etc.
+
+# `systemd`
+`systemd` is latest and most commonly used  implementation of `init` process. Most commonly `systemd` is
+responsible to manage the lifecycle of services. 
+
+There also other implementations like SystemV and upstart which are old. To find out wether you are using systemd 
+or not, do `ls -la /sbin | grep init`. If `init` is not symlink to systemd then you are not using systemd.
+
+`systemd`'s task are defined in terms of `unit`. `unit` contains instruction which service to start,
+dependencies, conditions for pre/post start and etc. if there exist dependencies, `systemd` will activate them
+first then will start the specified service itself.
+
+To manage the lifecycle of systemd - `systemctl` command is used. You can manage the service lifecycle by
+executing `systemctl enable|disable|start|stop|restart|reload|status <unit name>` commands.
+
+To view the logs of the unit, execute `journalctl --unit=<unit name>`.
+
+## `initramd` or Initial RAM Filesystem
+It is used to temporarily store drivers or other stuff as loadable modules used by kernel while booting.
+They are often stored as archive files so the kernel can extract into RAM and locate the needed driver.
+The reason for that, for example, the kernel might need RAID device driver in order to mount filesystem
+of the device.
