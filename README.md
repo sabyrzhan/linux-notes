@@ -31,6 +31,30 @@ They are used to create and execute the processes accordingly.
 2. `exec(program)` - executes  the `program` by replacing the current 
   process, which shell.
 
+### `lsof`
+Used to view the list of open files used by processes.
+
+To view processes using files in specified path: `lsof +D <file or dir path>`
+
+To view by process id: `lsof -p <pid>`
+
+## `strace` and `ltrace`
+Used to view system calls and library calls respectively. Can be used to debug why a service does not start properly.
+
+Try executing `strace cat /dev/null` to view the system call trace.
+
+## Process priority
+If you do `top`, you will see there column `PRI`. This shows processes priority. It ranges from `-20 to 20`, where
+-20 is the highest and 20 is the lowest. Most of the time you will notice the processes have lowers priorities, which
+means when system is under low load it remains idle.
+
+But next to `PRI` column you can see `NI` column - nice. It gives hint to kernel how much it should be nicer to other
+processes. The more you add value to `NI` the nicer you are, which means lower the priority be for the process. 
+To update the value of the process do:
+```shell
+renice 20 <pid>
+```
+
 # Memory management
 The memory is used to read data by any process. The data is processed and 
 written back by CPU. But the memory space itself is not shared between 
