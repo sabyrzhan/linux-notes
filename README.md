@@ -96,3 +96,33 @@ created either in partition or swap file.
    2. execute `mkswap <file_name>`
    3. specify file in `/etc/fstab`
    4. execute `swapon` to enable swap
+
+# Boot loading
+Overall boot process steps look following:
+1. BIOS/UEFI loads boot loader to memory and runs it
+2. Boot loader finds kernel image from disk, loads to memory and starts it
+3. Kernal initializes devices and loads device drivers
+4. Kernel mounts root file system
+5. Kernel starts `init` process with `ID=1`. `init` starts `user space`
+6. `init` starts other user related initializations and processes
+7. at the end `init` prompts `login` to user to enter the system
+
+If your OS uses systemd for booting, you can view kernel boot logs using 
+`journalctl -k`. By using `journalctl -b` it is possible to view old logs too.
+
+To boot the kernel some parameters are passed in order to boot properly. For example,
+```bash
+BOOT_IMAGE=/boot/vmlinuz-5.11.0-27-generic root=/dev/mapper/vgubuntu-root ro quiet splash
+(this line can also be viewed from /proc/cmdline)
+```
+Here we can see that bootloader using image in `ro`(read-only) mode. This is required to run `fsck`
+to validate filesystem integrity and that no changes will be made. 
+
+## Boot loaders
+Boot loader's task is to search for kernel somewhere from disk, load it to memory and 
+run with parameters. But as we know only kernel can initialize devices and load the drivers.
+However, thanks to disk internal firmware BIOS/UEFI can access the disk using 
+LBA (Logical Block Access) interface. Even though its performance is very low compared to
+device driver, but it is enough to read kernel image and load to RAM.
+
+The list of known boot loaders are GRUB, LILO (ELILO that supports UEFI), SYSLINUX, LOADLIN etc.
