@@ -64,4 +64,35 @@ bottom
    SCSI messages to talk to SCSI devices and vice versa.
 2. SCSI Sybsystem - abstraction layer that privides communication between 
    Kernel API and Hardware using SCSI protocol.
-3. Hardware layer - drivers here send SCSI messages to hardware and vice versa. 
+3. Hardware layer - drivers here send SCSI messages to hardware and vice versa.
+
+## `/etc/factab`
+It is used to mount filesystems at boot time. The file contains list of filesystems 
+with boot options.
+
+## Special-purpose filesystems
+Other than standard `ext2/ext3/ext4/fat` filesystems, there are filesystems that are mounted and 
+not mapped to physical disk devices. Those filesystems can represent info about processes, can be 
+mapped to RAM, etc. Some of them are:
+1. `/proc` - the directory is mounted and stores every process information. It also provides info about 
+   CPU, RAM, disk and etc.
+2. `/sys` - sysfs. Provides disk storage information.
+3. `tmpfs` - mounted on `/run` and other locations. It is used to create tmp storage in RAM and swap spaces.
+4. `sqashfs` - RO filesystem used to mount compressed files. One example is Ubuntu snap package manager that mounts 
+   installed packages.
+5. `overlay` - used to merge multiple directories to be used as single entity. Most often containers use this FS
+   to provide volumes to containers.
+
+## Swap memory
+Swap memory is used to temporarily store the inactive processes in non-ram storage. On Linux, swap memory can be
+created either in partition or swap file.
+1. to create swap in a partition:
+   1. execute `mkswap <partition uuid>`
+   2. specify partition in `/etc/fstab`
+   3. execute `swapon` to enable swap
+2. to create swap in regular file
+   1. create file with the size you prefer, for example with `dd` command:
+      1. `dd if=/dev/zero of=swap_file bs=1024k count=num_mb`
+   2. execute `mkswap <file_name>`
+   3. specify file in `/etc/fstab`
+   4. execute `swapon` to enable swap
