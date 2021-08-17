@@ -148,3 +148,36 @@ It is used to temporarily store drivers or other stuff as loadable modules used 
 They are often stored as archive files so the kernel can extract into RAM and locate the needed driver.
 The reason for that, for example, the kernel might need RAID device driver in order to mount filesystem
 of the device.
+
+# Users and passwords
+User information is stored in `/etc/passwd`. User passwords are stored in `/etc/shadow` file.
+
+There are special users like `nobody` which sometimes you can find in `passwd` file. Such users often does not have
+password which is marked as `*` in passwd file. These users have only readonly permission to files 
+and used by many processes.
+
+## Getty and login
+After booting, linux prompts user to login using `getty` process. After entering login, it is replaced with `login`
+process to accept password. If password is correct it is replaced using `exec()` syscall with user shell.
+
+## Cron jobs
+Cron jobs are executed using `cron` service. Cron jobs are added using `crontab` command. To add and edit `cron` job
+at the same time, execute `crontab -e` command.
+
+The syntax looks like this:
+```shell
+15 09 14 * * /home/juser/bin/spmake
+```
+The time format is:
+* M - minutes (0-23)
+* H - hour (0 - 23)
+* D - day of the month (1 - 31)
+* M - month of the year (1 - 12)
+* W - day of the week (0 - 7). Here 0 and 7 are Sundays.
+In above example it is said - execute `spmake` script at 09:15 every 14th day every month.
+
+Also the frequency can be increased by using comma. For example:
+```shell
+15 09 5,14 * * /home/juser/bin/spmake
+```
+Execute the same command at the same time every 5th and 14th day every month.
