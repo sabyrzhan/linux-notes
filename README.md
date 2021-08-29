@@ -1,5 +1,6 @@
 # Linux notes of the Java developer
 
+
 # Process management
 ### Context switching
 Process tasks are executed within a time slice which is provided by kernel.
