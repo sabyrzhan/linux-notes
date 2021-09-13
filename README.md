@@ -206,4 +206,3 @@ Also the frequency can be increased by using comma. For example:
 15 09 5,14 * * /home/juser/bin/spmake
 ```
 Execute the same command at the same time every 5th and 14th day every month.
-
