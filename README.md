@@ -215,5 +215,3 @@ The permissions also defined in ordinal format - 4 (read), 2 (write), 1 (execute
 For example:
 1. `-rwxrw-r--` the same as `764` = (4+2+1 4+2 1)
 2. `-rwxr-xr-x` the same as `755` = (4+2+1 4+1 4+1)
-
-
