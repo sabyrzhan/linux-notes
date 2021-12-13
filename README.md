@@ -221,3 +221,8 @@ For example:
 ```
 $> for i in 1 2 3; do echo $i ; done
 ```
+* Use grouping to group commands that should return single status. For example:
+```
+$> cd folder1 2>/dev/null || mkdir folder1 && cd folder1 <-- this will show error `folder1 does not exist` since last `cd folder` is executed seperately
+$> cd folder1 2>/dev/null || { mkdir folder1 && cd folder1 } <-- will cd to folder1 after `mkdir folder1` if folder does not exist
+```
