@@ -227,4 +227,4 @@ $> cd folder1 2>/dev/null || mkdir folder1 && cd folder1 <-- this will show erro
 $> cd folder1 2>/dev/null || { mkdir folder1 && cd folder1 } <-- will cd to folder1 after `mkdir folder1` if folder does not exist
 ```
 * Adding shebang line to file lets to identify which shell interpreter to use when executing commands. Without shebang - it default to use current shell
-  interpreter. Example bash shebang is `#!/bin/bash`
+  interpreter. Example bash shebang is `#!/bin/bash`. Type `file shell_file.sh` to identify which interpreter it is targeted to.
