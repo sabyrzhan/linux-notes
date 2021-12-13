@@ -222,7 +222,7 @@ For example:
 2. subtract base - umask value = result permission
 3. assign result permission to folder or file
 
-Since system can have root and regular users, their default values will look like following:
+Since system can have root and regular users, their default values is calculated in following ways:
 1. `root`: 0777 - 0022 = 0755 (folders) and 0666 - 0022 = 0644 (files)
 2. `user`: 0777 - 0002 = 0775 (folders) and 0666 - 0002 = 0644 (files)
 
