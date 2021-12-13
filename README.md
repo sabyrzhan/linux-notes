@@ -216,6 +216,16 @@ For example:
 1. `-rwxrw-r--` the same as `764` = (4+2+1 4+2 1)
 2. `-rwxr-xr-x` the same as `755` = (4+2+1 4+1 4+1)
 
+## `umask` - user masks
+`umask` is used to define and set default permissions to new files or folders. The procedure looks following when system creates new folder/file:
+1. gets base permission for folder (`0777`) or file (`0666`)
+2. subtract base - umask value = result permission
+3. assign result permission to folder or file
+
+Since system can have root and regular users, their default values will look like following:
+1. `root`: 0777 - 0022 = 0755 (folders) and 0666 - 0022 = 0644 (files)
+2. `user`: 0777 - 0002 = 0775 (folders) and 0666 - 0002 = 0644 (files)
+
 # Shell scripts
 * `;` represents the end of the line of the code. Used to seperate end of line when executing whole script in one line. F.e.:
 ```
