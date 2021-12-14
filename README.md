@@ -238,3 +238,14 @@ $> cd folder1 2>/dev/null || { mkdir folder1 && cd folder1 } <-- will cd to fold
 ```
 * Adding shebang line to file lets to identify which shell interpreter to use when executing commands. Without shebang - it default to use current shell
   interpreter. Example bash shebang is `#!/bin/bash`. Type `file shell_file.sh` to identify which interpreter it is targeted to.
+
+## `systemd` file-hierarchy
+To comply with `systemd` folder structure, `/bin` and `/usr/bin` folders with executables are included to `PATH` variable. But adding custom executables
+there requires `root` privilege. So in order to let users make their executables part of the global `PATH` variable, `systemd` includes `$HOME/.local/bin`
+to `PATH` by default. You can find it in `~/.profile` file which includes this directory if it exists. So if you add it for the first time, you should 
+either `source ~/.profile` or logout/login again to take into effect.
+
+There is more information in `file-hierarchy(7)`.
+Related links:
+- https://www.freedesktop.org/software/systemd/man/file-hierarchy.html
+- https://www.freedesktop.org/wiki/Software/xdg-user-dirs/
