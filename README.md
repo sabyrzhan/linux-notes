@@ -278,3 +278,5 @@ else
   echo 'This will never be shown';
 fi
 ```
+- `[ -n "$VARIABLE" ]` - tests for empty value. The same as `test -n "$VARIABLE"
+- `!` - negates the boolean value
