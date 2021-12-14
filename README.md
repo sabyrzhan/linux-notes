@@ -255,3 +255,18 @@ $> cd folder1 2>/dev/null || { mkdir folder1 && cd folder1 } <-- will cd to fold
 - `$0` - program name
 - `$1,$2,$3....$n` - program arguments
 - `$#` - argument count, `$*` - arguments as string, `$@` - arguments as array
+
+## Shell operators usages
+- `if`. Useful when used with `[` and `]` operators:
+```
+if [ "$#" -lt 1 ]; then
+  echo "Must provide at least 1 argument";
+  exit 1;
+fi
+```
+- `for`:
+```
+for i in $@; do
+  echo $i;
+done
+```
