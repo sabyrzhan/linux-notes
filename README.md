@@ -168,6 +168,16 @@ executing `systemctl enable|disable|start|stop|restart|reload|status <unit name>
 
 To view the logs of the unit, execute `journalctl --unit=<unit name>`.
 
+## `systemd` file-hierarchy
+To comply with `systemd` folder structure, `/bin` and `/usr/bin` folders with executables are included to `PATH` variable. But adding custom executables
+there requires `root` privilege. So in order to let users make their executables part of the global `PATH` variable, `systemd` includes `$HOME/.local/bin`
+to `PATH` by default. You can find it in `~/.profile` file which includes this directory if it exists. So if you add it for the first time, you should 
+either `source ~/.profile` or logout/login again to take into effect.
+
+Related links:
+- https://www.freedesktop.org/software/systemd/man/file-hierarchy.html. Also locally in `file-hierarchy(7)`
+- https://www.freedesktop.org/wiki/Software/xdg-user-dirs/
+
 ## `initramd` or Initial RAM Filesystem
 It is used to temporarily store drivers or other stuff as loadable modules used by kernel while booting.
 They are often stored as archive files so the kernel can extract into RAM and locate the needed driver.
@@ -245,13 +255,3 @@ $> cd folder1 2>/dev/null || { mkdir folder1 && cd folder1 } <-- will cd to fold
 - `$0` - program name
 - `$1,$2,$3....$n` - program arguments
 - `$#` - argument count, `$*` - arguments as string, `$@` - arguments as array
-
-## `systemd` file-hierarchy
-To comply with `systemd` folder structure, `/bin` and `/usr/bin` folders with executables are included to `PATH` variable. But adding custom executables
-there requires `root` privilege. So in order to let users make their executables part of the global `PATH` variable, `systemd` includes `$HOME/.local/bin`
-to `PATH` by default. You can find it in `~/.profile` file which includes this directory if it exists. So if you add it for the first time, you should 
-either `source ~/.profile` or logout/login again to take into effect.
-
-Related links:
-- https://www.freedesktop.org/software/systemd/man/file-hierarchy.html. Also locally in `file-hierarchy(7)`
-- https://www.freedesktop.org/wiki/Software/xdg-user-dirs/
