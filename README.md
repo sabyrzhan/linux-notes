@@ -257,7 +257,7 @@ $> cd folder1 2>/dev/null || { mkdir folder1 && cd folder1 } <-- will cd to fold
 - `$#` - argument count, `$*` - arguments as string, `$@` - arguments as array
 
 ## Shell operators usages
-- `if`. Useful when used with `[` and `]` operators:
+- `if`. When testing conditions better to use `test` or `[` and `]` commands.
 ```
 if [ "$#" -lt 1 ]; then
   echo "Must provide at least 1 argument";
@@ -269,4 +269,12 @@ fi
 for i in $@; do
   echo $i;
 done
+```
+- `[` and `]` brackets are not required when testing commands.
+```
+if unknownncmd 1; then
+  echo 'This will be executed, since unknowncmd does not exist';
+else
+  echo 'This will never be shown';
+fi
 ```
