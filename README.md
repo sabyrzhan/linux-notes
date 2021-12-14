@@ -280,3 +280,11 @@ fi
 ```
 - `[ -n "$VARIABLE" ]` - tests for empty value. The same as `test -n "$VARIABLE"
 - `!` - negates the boolean value
+- functions:
+```
+my_func() {
+  echo "This is func and here is the func first argument: $1";
+}
+
+my_func "This is the argument";
+```
