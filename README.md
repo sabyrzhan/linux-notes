@@ -245,7 +245,6 @@ there requires `root` privilege. So in order to let users make their executables
 to `PATH` by default. You can find it in `~/.profile` file which includes this directory if it exists. So if you add it for the first time, you should 
 either `source ~/.profile` or logout/login again to take into effect.
 
-There is more information in `file-hierarchy(7)`.
 Related links:
-- https://www.freedesktop.org/software/systemd/man/file-hierarchy.html
+- https://www.freedesktop.org/software/systemd/man/file-hierarchy.html. Also locally in `file-hierarchy(7)`
 - https://www.freedesktop.org/wiki/Software/xdg-user-dirs/
